@@ -41,38 +41,32 @@ limitations under the License.
 
 <!-- /.intro -->
 
+<section class="installation">
 
+## Installation
+
+```bash
+npm install @stdlib/blas-ext-base-ndarray-sfill-nan
+```
+
+Alternatively,
+
+-   To load the package in a website via a `script` tag without installation and bundlers, use the [ES Module][es-module] available on the [`esm`][esm-url] branch (see [README][esm-readme]).
+-   If you are using Deno, visit the [`deno`][deno-url] branch (see [README][deno-readme] for usage intructions).
+-   For use in Observable, or in browser/node environments, use the [Universal Module Definition (UMD)][umd] build available on the [`umd`][umd-url] branch (see [README][umd-readme]).
+
+The [branches.md][branches-url] file summarizes the available branches and displays a diagram illustrating their relationships.
+
+To view installation and usage instructions specific to each branch build, be sure to explicitly navigate to the respective README files on each branch, as linked to above.
+
+</section>
 
 <section class="usage">
 
 ## Usage
 
-To use in Observable,
-
 ```javascript
-sfillNaN = require( 'https://cdn.jsdelivr.net/gh/stdlib-js/blas-ext-base-ndarray-sfill-nan@umd/browser.js' )
-```
-
-To vendor stdlib functionality and avoid installing dependency trees for Node.js, you can use the UMD server build:
-
-```javascript
-var sfillNaN = require( 'path/to/vendor/umd/blas-ext-base-ndarray-sfill-nan/index.js' )
-```
-
-To include the bundle in a webpage,
-
-```html
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/blas-ext-base-ndarray-sfill-nan@umd/browser.js"></script>
-```
-
-If no recognized module system is present, access bundle contents via the global scope:
-
-```html
-<script type="text/javascript">
-(function () {
-    window.sfillNaN;
-})();
-</script>
+var sfillNaN = require( '@stdlib/blas-ext-base-ndarray-sfill-nan' );
 ```
 
 #### sfillNaN( arrays )
@@ -89,8 +83,16 @@ var alpha = scalar2ndarray( 0.0, {
     'dtype': 'float32'
 });
 
-sfillNaN( [ x, alpha ] );
-// x => <ndarray>[ 0.0, -2.0, 3.0, 0.0, 4.0, -6.0 ]
+var start = scalar2ndarray( 0, {
+    'dtype': 'float32'
+});
+
+var end = scalar2ndarray( 3, {
+    'dtype': 'float32'
+});
+
+sfillNaN( [ x, alpha, start, end ] );
+// x => <ndarray>[ 0.0, -2.0, 3.0, NaN, 4.0, -6.0 ]
 ```
 
 The function has the following parameters:
@@ -99,6 +101,8 @@ The function has the following parameters:
 
     -   a one-dimensional input ndarray.
     -   a zero-dimensional ndarray containing the scalar constant.
+    -   a zero-dimensional ndarray containing the starting index (inclusive).
+    -   a zero-dimensional ndarray containing the ending index (exclusive).
 
 </section>
 
@@ -109,6 +113,7 @@ The function has the following parameters:
 ## Notes
 
 -   The input ndarray is modified **in-place** (i.e., the input ndarray is **mutated**).
+-   If a specified `start` or `end` index is negative, the function resolves the respective index by counting backward from the last element (where `-1` refers to the last element).
 
 </section>
 
@@ -120,17 +125,12 @@ The function has the following parameters:
 
 <!-- eslint no-undef: "error" -->
 
-```html
-<!DOCTYPE html>
-<html lang="en">
-<body>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-nans@umd/browser.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-from-scalar@umd/browser.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-to-array@umd/browser.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-ndarraylike2scalar@umd/browser.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/blas-ext-base-ndarray-sfill-nan@umd/browser.js"></script>
-<script type="text/javascript">
-(function () {
+```javascript
+var nans = require( '@stdlib/ndarray-nans' );
+var scalar2ndarray = require( '@stdlib/ndarray-from-scalar' );
+var ndarray2array = require( '@stdlib/ndarray-to-array' );
+var ndarraylike2scalar = require( '@stdlib/ndarray-ndarraylike2scalar' );
+var sfillNaN = require( '@stdlib/blas-ext-base-ndarray-sfill-nan' );
 
 var opts = {
     'dtype': 'float32'
@@ -142,13 +142,14 @@ console.log( ndarray2array( x ) );
 var alpha = scalar2ndarray( 5.0, opts );
 console.log( 'Alpha: %d', ndarraylike2scalar( alpha ) );
 
-sfillNaN( [ x, alpha ] );
-console.log( ndarray2array( x ) );
+var start = scalar2ndarray( 2, opts );
+console.log( 'Start Index: %d', ndarraylike2scalar( start ) );
 
-})();
-</script>
-</body>
-</html>
+var end = scalar2ndarray( 8, opts );
+console.log( 'End Index: %d', ndarraylike2scalar( end ) );
+
+sfillNaN( [ x, alpha, start, end ] );
+console.log( ndarray2array( x ) );
 ```
 
 </section>
