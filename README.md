@@ -41,14 +41,32 @@ limitations under the License.
 
 <!-- /.intro -->
 
+<section class="installation">
 
+## Installation
+
+```bash
+npm install @stdlib/blas-ext-base-ndarray-sfill-nan
+```
+
+Alternatively,
+
+-   To load the package in a website via a `script` tag without installation and bundlers, use the [ES Module][es-module] available on the [`esm`][esm-url] branch (see [README][esm-readme]).
+-   If you are using Deno, visit the [`deno`][deno-url] branch (see [README][deno-readme] for usage intructions).
+-   For use in Observable, or in browser/node environments, use the [Universal Module Definition (UMD)][umd] build available on the [`umd`][umd-url] branch (see [README][umd-readme]).
+
+The [branches.md][branches-url] file summarizes the available branches and displays a diagram illustrating their relationships.
+
+To view installation and usage instructions specific to each branch build, be sure to explicitly navigate to the respective README files on each branch, as linked to above.
+
+</section>
 
 <section class="usage">
 
 ## Usage
 
 ```javascript
-import sfillNaN from 'https://cdn.jsdelivr.net/gh/stdlib-js/blas-ext-base-ndarray-sfill-nan@deno/mod.js';
+var sfillNaN = require( '@stdlib/blas-ext-base-ndarray-sfill-nan' );
 ```
 
 #### sfillNaN( arrays )
@@ -56,8 +74,8 @@ import sfillNaN from 'https://cdn.jsdelivr.net/gh/stdlib-js/blas-ext-base-ndarra
 Replaces elements in a one-dimensional single-precision floating-point ndarray equal to `NaN` with a specified scalar constant.
 
 ```javascript
-import Float32Vector from 'https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-vector-float32@deno/mod.js';
-import scalar2ndarray from 'https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-from-scalar@deno/mod.js';
+var Float32Vector = require( '@stdlib/ndarray-vector-float32' );
+var scalar2ndarray = require( '@stdlib/ndarray-from-scalar' );
 
 var x = new Float32Vector( [ NaN, -2.0, 3.0, NaN, 4.0, -6.0 ] );
 
@@ -108,11 +126,11 @@ The function has the following parameters:
 <!-- eslint no-undef: "error" -->
 
 ```javascript
-import nans from 'https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-nans@deno/mod.js';
-import scalar2ndarray from 'https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-from-scalar@deno/mod.js';
-import ndarray2array from 'https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-to-array@deno/mod.js';
-import ndarraylike2scalar from 'https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-ndarraylike2scalar@deno/mod.js';
-import sfillNaN from 'https://cdn.jsdelivr.net/gh/stdlib-js/blas-ext-base-ndarray-sfill-nan@deno/mod.js';
+var nans = require( '@stdlib/ndarray-nans' );
+var scalar2ndarray = require( '@stdlib/ndarray-from-scalar' );
+var ndarray2array = require( '@stdlib/ndarray-to-array' );
+var ndarraylike2scalar = require( '@stdlib/ndarray-ndarraylike2scalar' );
+var sfillNaN = require( '@stdlib/blas-ext-base-ndarray-sfill-nan' );
 
 var opts = {
     'dtype': 'float32'
@@ -155,7 +173,7 @@ console.log( ndarray2array( x ) );
 
 ## Notice
 
-This package is part of [stdlib][stdlib], a standard library with an emphasis on numerical and scientific computing. The library provides a collection of robust, high performance libraries for mathematics, statistics, streams, utilities, and more.
+This package is part of [stdlib][stdlib], a standard library for JavaScript and Node.js, with an emphasis on numerical and scientific computing. The library provides a collection of robust, high performance libraries for mathematics, statistics, streams, utilities, and more.
 
 For more information on the project, filing bug reports and feature requests, and guidance on how to develop [stdlib][stdlib], see the main project [repository][stdlib].
 
